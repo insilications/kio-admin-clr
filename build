@@ -65,6 +65,7 @@ if [[ -n "${BUILD_OPT}" ]]; then
     rm -rf ./builddir/ ||:
     mkdir builddir
     cmake -G Ninja -DCMAKE_INSTALL_LIBDIR=/usr/lib64 -DLIB_INSTALL_DIR=/usr/lib64 -DLIB_SUFFIX=64 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF -DBUILD_TESTING=OFF -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON -S . -B builddir/
+    sd ' -O3' -- ' -Ofast -g0' $(fd -uu --glob *.ninja)
     ninja -j20 -v -C builddir
     sudo ninja -C builddir install
 fi
